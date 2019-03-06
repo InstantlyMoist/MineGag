@@ -1,0 +1,9 @@
+Messages:
+  ViewingMemes: '&8&oMemeGag: &7You are now viewing memes!, move to go back to normal. Jump to see the next meme'
+  FullURL: '&8&oMemeGag: &7%url%'
+  StoppedViewing: '&8&oMemeGag: &7You stopped viewing memes :('
+  Actionbar: '&c%title%'
+  NoPermission: '&8&oMemeGag: &7You don''t have permissions to do this!'
+  NotAPlayer: '&8&oMemeGag: &7You must be a player in order to execute this command!'
+  UnknownArgument: '&8&oMemeGag: &7The argument you specified is unknown!'
+  Reloaded: '&8&oMemeGag: &7The plugin has been reloaded!'

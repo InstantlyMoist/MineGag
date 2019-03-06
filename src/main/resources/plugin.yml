@@ -1,0 +1,10 @@
+name: MineGag
+version: 1.0
+main: me.kyllian.minegag.MineGagPlugin
+description: View memes in minecraft
+
+commands:
+  minegag:
+    usage: /<command>
+    description: Base command of the plugin
+    aliases: [mg]

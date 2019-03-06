@@ -1,0 +1,7 @@
+
+.classpath
+.project
+.settings
+target
+src/test/
+src/test/java/test/JGagTest.java
