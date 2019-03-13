@@ -5,7 +5,11 @@ import me.kyllian.minegag.utils.*;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.concurrent.Callable;
+
 public class MineGagPlugin extends JavaPlugin {
+
+    public int memesViewed = 0;
 
     private ActionBar actionBar;
 
@@ -13,6 +17,8 @@ public class MineGagPlugin extends JavaPlugin {
     private MemeHandler memeHandler;
     private PlayerHandler playerHandler;
     private MessageHandler messageHandler;
+
+    private UpdateChecker updateChecker;
 
     @Override
     public void onEnable() {
@@ -22,6 +28,13 @@ public class MineGagPlugin extends JavaPlugin {
         initializeCommands();
 
         Metrics metrics = new Metrics(this);
+
+        metrics.addCustomChart(new Metrics.SingleLineChart("memes_viewed", new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception {
+                return memesViewed;
+            }
+        }));
     }
 
     public void initializeHandlers() {
@@ -31,6 +44,8 @@ public class MineGagPlugin extends JavaPlugin {
         memeHandler = new MemeHandler(this);
         playerHandler = new PlayerHandler(this);
         messageHandler = new MessageHandler(this);
+
+        updateChecker = new UpdateChecker(this, 65417);
     }
 
     public void initializeCommands() {
@@ -55,5 +70,9 @@ public class MineGagPlugin extends JavaPlugin {
 
     public ActionBar getActionBar() {
         return actionBar;
+    }
+
+    public UpdateChecker getUpdateChecker() {
+        return updateChecker;
     }
 }

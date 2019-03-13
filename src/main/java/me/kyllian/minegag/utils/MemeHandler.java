@@ -34,6 +34,7 @@ public class MemeHandler {
         new BukkitRunnable() {
             public void run() {
                 try {
+                    plugin.memesViewed++;
                     PlayerData playerData = plugin.getPlayerHandler().getPlayerData(player);
 
                     URLConnection connection = url.openConnection();

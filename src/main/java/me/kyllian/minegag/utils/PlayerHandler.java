@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -45,6 +46,12 @@ public class PlayerHandler extends BukkitRunnable implements Listener {
         Player player = event.getPlayer();
         PlayerData playerData = plugin.getPlayerHandler().getPlayerData(player);
         if (playerData.isViewingMemes()) event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        if (player.hasPermission("minegag.update")) player.sendMessage(plugin.getUpdateChecker().getUpdateMessage());
     }
 
     public void run() {

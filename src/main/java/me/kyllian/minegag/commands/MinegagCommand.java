@@ -43,6 +43,16 @@ public class MinegagCommand implements CommandExecutor {
                 commandSender.sendMessage(plugin.getMessageHandler().getReloadedMessage());
                 return true;
             }
+            if (args[0].equalsIgnoreCase("update")) {
+                if (!commandSender.hasPermission("minegag.update")) {
+                    commandSender.sendMessage(plugin.getMessageHandler().getNoPermissionMessage());
+                    return true;
+                }
+                commandSender.sendMessage(plugin.getMessageHandler().getCheckingUpdateMessage());
+                plugin.getUpdateChecker().check();
+                commandSender.sendMessage(plugin.getUpdateChecker().getUpdateMessage());
+                return true;
+            }
         }
         commandSender.sendMessage(plugin.getMessageHandler().getUnknownArgumentMessage());
         return true;

@@ -46,4 +46,17 @@ public class MessageHandler {
     public String getReloadedMessage() {
         return colorTranslate(plugin.getConfig().getString("Messages.Reloaded"));
     }
+
+    public String getCheckingUpdateMessage() {
+        return colorTranslate(plugin.getConfig().getString("Messages.CheckingUpdate"));
+    }
+
+    public String getUpdateFoundMessage(String oldVersion, String newVersion) {
+        return colorTranslate(plugin.getConfig().getString("Messages.UpdateFound").replace("%oldversion%", oldVersion)
+                .replace("%newversion%", newVersion).replace("%url%", plugin.getUpdateChecker().getResourceURL()));
+    }
+
+    public String getUpdateNotFoundMessage() {
+        return colorTranslate(plugin.getConfig().getString("Messages.UpdateNotFound"));
+    }
 }
