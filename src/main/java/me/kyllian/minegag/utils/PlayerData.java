@@ -1,5 +1,6 @@
 package me.kyllian.minegag.utils;
 
+import me.kyllian.minegag.MineGagPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -8,13 +9,16 @@ import java.util.UUID;
 
 public class PlayerData {
 
+    private MineGagPlugin plugin;
     private UUID uuid;
+
     private boolean viewingMemes;
     private String currentTitle;
     private String currentUrl;
     private ItemStack changedItem;
 
-    public PlayerData(UUID uuid) {
+    public PlayerData(MineGagPlugin plugin, UUID uuid) {
+        this.plugin = plugin;
         this.uuid = uuid;
     }
 
@@ -23,7 +27,7 @@ public class PlayerData {
         viewingMemes = false;
         currentTitle = null;
         currentTitle = null;
-        player.getInventory().setItemInMainHand(changedItem);
+        plugin.getPlayerHandler().setItemInHand(player, changedItem);
         changedItem = null;
     }
 

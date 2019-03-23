@@ -28,7 +28,7 @@ public class MinegagCommand implements CommandExecutor {
             }
             PlayerData playerData = plugin.getPlayerHandler().getPlayerData(player);
             playerData.setViewingMemes(true);
-            playerData.setChangedItem(player.getInventory().getItemInMainHand());
+            playerData.setChangedItem(plugin.getPlayerHandler().getItemInHand(player));
             player.sendMessage(plugin.getMessageHandler().getViewingMemesMessage());
             plugin.getMemeHandler().sendMeme(player);
             return true;

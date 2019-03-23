@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
@@ -25,7 +26,7 @@ public class PlayerHandler extends BukkitRunnable implements Listener {
     }
 
     public PlayerData getPlayerData(Player player) {
-        return playerData.computeIfAbsent(player, f -> new PlayerData(player.getUniqueId()));
+        return playerData.computeIfAbsent(player, f -> new PlayerData(plugin, player.getUniqueId()));
     }
 
     @EventHandler
@@ -62,5 +63,14 @@ public class PlayerHandler extends BukkitRunnable implements Listener {
             plugin.getActionBar().sendActionBar(player, plugin.getMessageHandler().getActionbarMessage(playerData.getCurrentTitle()));
             // TODO: Update actionbar
         }
+    }
+
+    public ItemStack getItemInHand(Player player) {
+        return Bukkit.getVersion().contains("1.8") || Bukkit.getVersion().contains("1.7") ? player.getItemInHand() : player.getInventory().getItemInMainHand();
+    }
+
+    public void setItemInHand(Player player, ItemStack itemStack) {
+        if (Bukkit.getVersion().contains("1.8") || Bukkit.getVersion().contains("1.7")) player.setItemInHand(itemStack);
+        else player.getInventory().setItemInMainHand(itemStack);
     }
 }
