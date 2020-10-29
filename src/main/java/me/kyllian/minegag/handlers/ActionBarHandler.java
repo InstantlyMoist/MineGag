@@ -1,30 +1,29 @@
-package me.kyllian.minegag.utils;
+package me.kyllian.minegag.handlers;
 
-import me.kyllian.minegag.MineGagPlugin;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
-import sun.misc.MessageUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.List;
 
-public class ActionBar {
+public class ActionBarHandler {
 
-    // Core data
-    private MineGagPlugin plugin;
     private String nmsVersion;
-    private boolean oldVersion = false;
+    private boolean oldVersion;
 
-    public ActionBar(MineGagPlugin plugin) {
-        this.plugin = plugin;
+    public ActionBarHandler() {
         nmsVersion = Bukkit.getServer().getClass().getPackage().getName();
         nmsVersion = nmsVersion.substring(nmsVersion.lastIndexOf(".") + 1);
         oldVersion = nmsVersion.startsWith("1_7_") || nmsVersion.equalsIgnoreCase("1_8_R1");
     }
 
     public void sendActionBar(Player player, String message) {
+        if (Bukkit.getVersion().contains("1.16")) {
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
+            return;
+        }
         try {
             Class<?> craftPlayerClass = Class.forName("org.bukkit.craftbukkit." + nmsVersion + ".entity.CraftPlayer");
             Object craftPlayerObject = craftPlayerClass.cast(player);

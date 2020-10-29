@@ -7,11 +7,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class MinegagCommand implements CommandExecutor {
+public class MinegagExecutor implements CommandExecutor {
 
     private MineGagPlugin plugin;
 
-    public MinegagCommand(MineGagPlugin plugin) {
+    public MinegagExecutor(MineGagPlugin plugin) {
         this.plugin = plugin;
     }
 
@@ -27,8 +27,8 @@ public class MinegagCommand implements CommandExecutor {
                 return true;
             }
             PlayerData playerData = plugin.getPlayerHandler().getPlayerData(player);
-            playerData.setViewingMemes(true);
-            playerData.setChangedItem(plugin.getPlayerHandler().getItemInHand(player));
+            if (playerData.isViewingMemes()) return true;
+            playerData.setOldItem(plugin.getPlayerHandler().getItemInHand(player));
             player.sendMessage(plugin.getMessageHandler().getViewingMemesMessage());
             plugin.getMemeHandler().sendMeme(player);
             return true;
@@ -41,16 +41,6 @@ public class MinegagCommand implements CommandExecutor {
                 }
                 plugin.reloadConfig();
                 commandSender.sendMessage(plugin.getMessageHandler().getReloadedMessage());
-                return true;
-            }
-            if (args[0].equalsIgnoreCase("update")) {
-                if (!commandSender.hasPermission("minegag.update")) {
-                    commandSender.sendMessage(plugin.getMessageHandler().getNoPermissionMessage());
-                    return true;
-                }
-                commandSender.sendMessage(plugin.getMessageHandler().getCheckingUpdateMessage());
-                plugin.getUpdateChecker().check();
-                commandSender.sendMessage(plugin.getUpdateChecker().getUpdateMessage());
                 return true;
             }
         }

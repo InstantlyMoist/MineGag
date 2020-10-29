@@ -1,12 +1,12 @@
+reserved-maps: 1000
+
 Messages:
   Actionbar: '&c%title%'
-  CheckingUpdate: '&8&oMemeGag: &7Checking for update...'
-  FullURL: '&8&oMemeGag: &7%url%'
-  NoPermission: '&8&oMemeGag: &7You don''t have permissions to do this!'
-  NotAPlayer: '&8&oMemeGag: &7You must be a player in order to execute this command!'
-  Reloaded: '&8&oMemeGag: &7The plugin has been reloaded!'
-  StoppedViewing: '&8&oMemeGag: &7You stopped viewing memes :('
-  UnknownArgument: '&8&oMemeGag: &7The argument you specified is unknown!'
-  UpdateFound: '&8&oMemeGag: &7New version found! You are currently running version %oldversion%, version %newversion% is ready to be downloaded on %url%'
-  UpdateNotFound: '&8&oMemeGag: &7You are up to date!'
-  ViewingMemes: '&8&oMemeGag: &7You are now viewing memes!, move to go back to normal. Jump to see the next meme'
+  CheckingUpdate: '&8&oMineGag: &7Checking for update...'
+  FullURL: '&8&oMineGag: &7%url%'
+  NoPermission: '&8&oMineGag: &7You don''t have permissions to do this!'
+  NotAPlayer: '&8&oMineGag: &7You must be a player in order to execute this command!'
+  Reloaded: '&8&oMineGag: &7The plugin has been reloaded!'
+  StoppedViewing: '&8&oMineGag: &7You stopped viewing memes :('
+  UnknownArgument: '&8&oMineGag: &7The argument you specified is unknown!'
+  ViewingMemes: '&8&oMineGag: &7You are now viewing memes!, move to go back to normal. Jump to see the next meme'

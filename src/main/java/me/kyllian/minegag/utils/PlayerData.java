@@ -12,10 +12,8 @@ public class PlayerData {
     private MineGagPlugin plugin;
     private UUID uuid;
 
-    private boolean viewingMemes;
-    private String currentTitle;
-    private String currentUrl;
-    private ItemStack changedItem;
+    private String title;
+    private ItemStack oldItem;
 
     public PlayerData(MineGagPlugin plugin, UUID uuid) {
         this.plugin = plugin;
@@ -24,42 +22,30 @@ public class PlayerData {
 
     public void reset() {
         Player player = Bukkit.getPlayer(uuid);
-        viewingMemes = false;
-        currentTitle = null;
-        currentTitle = null;
-        plugin.getPlayerHandler().setItemInHand(player, changedItem);
-        changedItem = null;
+        plugin.getMapHandler().resetMap(plugin.getPlayerHandler().getItemInHand(player));
+        plugin.getPlayerHandler().setItemInHand(player, oldItem);
+        oldItem = null;
+        title = null;
+        plugin.getActionBarHandler().sendActionBar(player, "");
     }
 
     public boolean isViewingMemes() {
-        return viewingMemes;
+        return oldItem != null;
     }
 
-    public void setViewingMemes(boolean viewingMemes) {
-        this.viewingMemes = viewingMemes;
+    public ItemStack getOldItem() {
+        return oldItem;
     }
 
-    public String getCurrentTitle() {
-        return currentTitle;
+    public void setOldItem(ItemStack oldItem) {
+        this.oldItem = oldItem;
     }
 
-    public void setCurrentTitle(String currentTitle) {
-        this.currentTitle = currentTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public ItemStack getChangedItem() {
-        return changedItem;
-    }
-
-    public void setChangedItem(ItemStack changedItem) {
-        this.changedItem = changedItem;
-    }
-
-    public String getCurrentUrl() {
-        return currentUrl;
-    }
-
-    public void setCurrentUrl(String currentUrl) {
-        this.currentUrl = currentUrl;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

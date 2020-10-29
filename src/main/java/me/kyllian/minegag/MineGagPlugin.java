@@ -1,7 +1,15 @@
 package me.kyllian.minegag;
 
-import me.kyllian.minegag.commands.MinegagCommand;
-import me.kyllian.minegag.utils.*;
+import me.kyllian.minegag.commands.MinegagExecutor;
+import me.kyllian.minegag.handlers.ActionBarHandler;
+import me.kyllian.minegag.handlers.MemeHandler;
+import me.kyllian.minegag.handlers.MessageHandler;
+import me.kyllian.minegag.handlers.PlayerHandler;
+import me.kyllian.minegag.handlers.map.MapHandler;
+import me.kyllian.minegag.handlers.map.MapHandlerFactory;
+import me.kyllian.minegag.listeners.ItemHeldListener;
+import me.kyllian.minegag.listeners.PlayerMoveListener;
+import me.kyllian.minegag.listeners.PlayerQuitListener;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,23 +19,24 @@ public class MineGagPlugin extends JavaPlugin {
 
     public int memesViewed = 0;
 
-    private ActionBar actionBar;
+    private ActionBarHandler actionBarHandler;
 
     private MapHandler mapHandler;
     private MemeHandler memeHandler;
     private PlayerHandler playerHandler;
     private MessageHandler messageHandler;
 
-    private UpdateChecker updateChecker;
 
     @Override
     public void onEnable() {
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
+
+        initializeListners();
         initializeHandlers();
         initializeCommands();
 
-        Metrics metrics = new Metrics(this);
+        Metrics metrics = new Metrics(this, 65417);
 
         metrics.addCustomChart(new Metrics.SingleLineChart("memes_viewed", new Callable<Integer>() {
             @Override
@@ -37,19 +46,24 @@ public class MineGagPlugin extends JavaPlugin {
         }));
     }
 
-    public void initializeHandlers() {
-        actionBar = new ActionBar(this);
+    private void initializeListners() {
+        new ItemHeldListener(this);
+        new PlayerMoveListener(this);
+        new PlayerQuitListener(this);
+    }
 
-        mapHandler = new MapHandler();
+    private void initializeHandlers() {
+        actionBarHandler = new ActionBarHandler();
+
+        mapHandler = new MapHandlerFactory(this).getMapHandler();
         memeHandler = new MemeHandler(this);
         playerHandler = new PlayerHandler(this);
         messageHandler = new MessageHandler(this);
 
-        updateChecker = new UpdateChecker(this, 65417);
     }
 
-    public void initializeCommands() {
-        getCommand("minegag").setExecutor(new MinegagCommand(this));
+    private void initializeCommands() {
+        getCommand("minegag").setExecutor(new MinegagExecutor(this));
     }
 
     public MapHandler getMapHandler() {
@@ -68,11 +82,8 @@ public class MineGagPlugin extends JavaPlugin {
         return messageHandler;
     }
 
-    public ActionBar getActionBar() {
-        return actionBar;
+    public ActionBarHandler getActionBarHandler() {
+        return actionBarHandler;
     }
 
-    public UpdateChecker getUpdateChecker() {
-        return updateChecker;
-    }
 }

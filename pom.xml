@@ -4,30 +4,24 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>me.kyllian.spigottube</groupId>
+    <groupId>me.kyllian.minegag</groupId>
     <artifactId>MineGag</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <packaging>jar</packaging>
     <build>
+        <finalName>MineGag</finalName>
+        <directory>server/plugins/temp</directory>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <finalName>MineGag</finalName>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.1.0</version>
-                <!-- Do not include the <configuration>...</configuration> part if you are using Sponge! -->
                 <configuration>
+                    <outputFile>server/plugins/MineGag.jar</outputFile>
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
-                            <!-- Replace this with your package! -->
                             <shadedPattern>me.kyllian.minegag</shadedPattern>
                         </relocation>
                     </relocations>
@@ -65,16 +59,23 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.13-R0.1-SNAPSHOT</version>
+            <version>1.16.3-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <!--bStats API-->
         <dependency>
             <groupId>org.bstats</groupId>
             <artifactId>bstats-bukkit</artifactId>
-            <version>1.4</version>
+            <version>1.7</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+
     </dependencies>
 
 </project>
