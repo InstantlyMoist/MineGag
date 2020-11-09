@@ -36,7 +36,7 @@ public class MineGagPlugin extends JavaPlugin {
         initializeHandlers();
         initializeCommands();
 
-        Metrics metrics = new Metrics(this, 65417);
+        Metrics metrics = new Metrics(this, 4183);
 
         metrics.addCustomChart(new Metrics.SingleLineChart("memes_viewed", new Callable<Integer>() {
             @Override

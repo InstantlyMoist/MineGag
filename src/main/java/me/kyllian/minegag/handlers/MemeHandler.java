@@ -30,7 +30,6 @@ public class MemeHandler {
     }
 
     public void sendMeme(Player player) {
-        // TODO: Make async
         plugin.memesViewed++;
         new BukkitRunnable() {
             public void run() {
