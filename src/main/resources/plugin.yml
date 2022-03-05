@@ -1,5 +1,5 @@
 name: MineGag
-version: 2.01
+version: 2.02
 main: me.kyllian.minegag.MineGagPlugin
 description: View memes in minecraft
 api-version: 1.13

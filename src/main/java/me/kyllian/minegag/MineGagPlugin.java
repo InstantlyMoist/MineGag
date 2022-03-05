@@ -11,6 +11,7 @@ import me.kyllian.minegag.listeners.ItemHeldListener;
 import me.kyllian.minegag.listeners.PlayerMoveListener;
 import me.kyllian.minegag.listeners.PlayerQuitListener;
 import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SingleLineChart;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.concurrent.Callable;
@@ -38,12 +39,7 @@ public class MineGagPlugin extends JavaPlugin {
 
         Metrics metrics = new Metrics(this, 4183);
 
-        metrics.addCustomChart(new Metrics.SingleLineChart("memes_viewed", new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                return memesViewed;
-            }
-        }));
+        metrics.addCustomChart(new SingleLineChart("memes_viewed", () -> memesViewed));
     }
 
     private void initializeListners() {

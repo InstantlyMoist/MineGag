@@ -1,5 +1,7 @@
 package me.kyllian.minegag.handlers;
 
+import me.kyllian.minegag.handlers.map.MapHandlerNew;
+import me.kyllian.minegag.handlers.map.MapHandlerOld;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -20,7 +22,9 @@ public class ActionBarHandler {
     }
 
     public void sendActionBar(Player player, String message) {
-        if (Bukkit.getVersion().contains("1.16")) {
+        String minecraftVersion = Bukkit.getVersion();
+        int mainVer = Integer.parseInt(minecraftVersion.split("\\.")[1]);
+        if (mainVer >= 13) {
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
             return;
         }
